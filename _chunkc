@@ -33,14 +33,29 @@ PLUGIN_SKELETON
 # query desktops, monitors, windows for completions
 
 function __chunkc_monitors {
+    if ! chunkc --version 2>/dev/null; then
+        _message "chunkc connection failed!"
+        echo -1
+        return 0
+    fi
     echo $(seq $(chunkc tiling::query --monitor count))
 }
 
 function __chunkc_desktops {
+    if ! chunkc --version 2>/dev/null; then
+        _message "chunkc connection failed!"
+        echo -1
+        return 0
+    fi
     echo $(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor id))
 }
 
 function __chunkc_windows {
+    if ! chunkc --version 2>/dev/null; then
+        _message "chunkc connection failed!"
+        _describe -t windows "windows" "(0:'(chunkc not responding)')"
+        return 0
+    fi
     # TODO add notify for floating ?
     # not trivial - ::query -d doesn't tell you which windows are floating :/
 
