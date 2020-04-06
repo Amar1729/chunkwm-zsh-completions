@@ -96,26 +96,26 @@ function _chunkc_tiling_window {
         m   "[send window to monitor]:monitor choice:($relative $(__chunkc_monitors))"
         r   "[ratio -1.0 < r 1.0 for adjustment (must be used with -e)]:float:(FLOAT)"
         #e   "[resize a window (must be used with -r)]:adjust choice:($cardinal)"
-        e   ":resize:((-e\:'resize window' --adjust-window-edge\:'resize window')):direction:($cardinal)"
+        e   ":resize:(({-e,--adjust-window-edge}\:'resize window')):direction:($cardinal)"
         i   "[set bsp-insertion point for the focused container]:insertion choice:($cardinal cancel)"
         t   "[toggle various window options]:toggle choice:($toggle)"
     )
 
     # easiest way to add same description for multiple (long/short) options
     args=(
-        "-c${descs[c]}" "--close${descs[c]}"
-        "-f${descs[f]}" "--focus${descs[f]}"
-        "-s${descs[s]}" "--swap${descs[s]}"
-        "-w${descs[w]}" "--warp${descs[w]}"
-        "-g${descs[g]}" "--grid-layout${descs[g]}"
-        "-d${descs[d]}" "--send-to-desktop${descs[d]}"
-        "-m${descs[m]}" "--send-to-monitor${descs[m]}"
+        {-c,--close}"${descs[c]}"
+        {-f,--focus}"${descs[f]}"
+        {-s,--swap}"${descs[s]}"
+        {-w,--warp}"${descs[w]}"
+        {-g,--grid-layout}"${descs[g]}"
+        {-d,--send-to-desktop}"${descs[d]}"
+        {-m,--send-to-monitor}"${descs[m]}"
         # combine -r and -e, since order matters (-r first)
-        #"-r${descs[r]}" "--use-temporary-ratio${descs[r]}"
-        #"-e${descs[e]}" "--adjust-window-edge${descs[e]}"
-        "-r${descs[r]}${descs[e]}" "--use-temporary-ratio${descs[r]}${descs[e]}"
-        "-i${descs[i]}" "--use-insertion-point${descs[i]}"
-        "-t${descs[t]}" "--toggle${descs[t]}"
+        #{-r,--use-temporary-ratio}"${descs[r]}"
+        #{-e,--adjust-window-edge}"${descs[e]}"
+        {-r,--use-temporary-ratio}"${descs[r]}${descs[e]}"
+        {-i,--use-insertion-point}"${descs[i]}"
+        {-t,--toggle}"${descs[t]}"
     )
 
     _arguments - "(window)" $args
